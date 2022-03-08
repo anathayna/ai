@@ -1,1 +1,1 @@
-lib python-chess: https://python-chess.readthedocs.io/en/latest/git 
+[lib] python-chess: https://python-chess.readthedocs.io/
