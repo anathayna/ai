@@ -1,1 +1,2 @@
-[run] python3 main.py
+# ep2
+python3 main.py
