@@ -1,2 +1,2 @@
 # ep2
-python3 main.py
+execute by running `python3 main.py`
