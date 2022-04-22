@@ -2,16 +2,24 @@
 # que é chamado do Problema de Roteamento de Veículos 
 # ou Vehicle Routing Problem (VRP)
 
+# menor rota possível
+
 # sequência de locais que podemos chamar de 0, 1, 2, 3, 4, ..., até N
 # o local 0 (zero) é o local da padaria de onde as vans saem e chegam. 
 
 import random
 import math
 
+# nó = gene
+# indivíduo = conjunto de genes = rota
+# tenha um critério de parada (qtd de gerações/limite:1000)
+# taxa de mutação = random.choices(list, k=3)
+
 def create_data_model():
     data = {}
-    data['matriz_distancia'] = [
-        [ 0, 548, 776, 696, 582, 274, 502, 194, 308, 194, 536, 502, 388, 354, 468, 776, 662 ], # exemplo: entre 0 e 1, temos distância de 548.
+    data['matriz_distancia'] = [ # distance_matrix
+        [ 0, 548, 776, 696, 582, 274, 502, 194, 308, 194, 536, 502, 388, 354, 468, 776, 662 ], 
+        # exemplo: entre 0 e 1, temos distância de 548.
         [ 548, 0, 684, 308, 194, 502, 730, 354, 696, 742, 1084, 594, 480, 674, 1016, 868, 1210 ],
         [ 776, 684, 0, 992, 878, 502, 274, 810, 468, 742, 400, 1278, 1164, 1130, 788, 1552, 754 ],
         [ 696, 308, 992, 0, 114, 650, 878, 502, 844, 890, 1232, 514, 628, 822, 1164, 560, 1358 ],
@@ -28,12 +36,13 @@ def create_data_model():
         [ 468, 1016, 788, 1164, 1050, 514, 514, 662, 320, 274, 388, 650, 536, 342, 0, 764, 194 ],
         [ 776, 868, 1552, 560, 674, 1050, 1278, 742, 1084, 810, 1152, 274, 388, 422, 764, 0, 798 ],
         [ 662, 1210, 754, 1358, 1244, 708, 480, 856, 514, 468, 354, 844, 730, 536, 194, 798, 0 ],
-    ]
-    data['num_vehicles'] = 4
+    ] # todos os arrays vão de 0 a 16 elementos (17 no total)
+    data['num_vehicles'] = 4 # vans
     data['depot'] = 0
     return data
 
-# hiperparâmetros
+
+
 tamanho_populacao = 100
 tx_mutacao = 0.50
 tx_crossover = 0.15
@@ -41,11 +50,31 @@ tx_tragedia = 0.05
 geracoes_max = 100_000
 geracoes_tragedia = 100
 
+
+
+# gerar o individuo: veículo com uma sequência de entrega
+# função fitness: tentar encontrar a melhor sequência
+# função de mutação: sugestão fazer o flip
+# função cross-over: cruzar os indivíduos (verificar se vale a pena fazer p/ esse problema, se não vai piorar)
+# função tragédia: verificar se vale fazer nesse problema
+# função seleção: seleciona/clasifica um sequência e enviar p/ as funções de mutação de cross-over
+# finaliza com o while/loop até achar o melhor caso (importante: critério de parada)
+
+# pegar o de nós do problema
+# pegar o número do nó que representa o ponto de origem
+
+# criar função de distance_callback(i, j)
+# criar função de rota de veículo
+
+
+
 '''
+
+mesma quilometragem por dia e pudessem carregar aproximadamente a mesma quantidade carga entre elas para quem nenhuma equipe ficasse sobrecarregada
 
 dada uma quantidade de N de vans e as distâncias entre os pontos de entrega, deve gerar:
 
-- Genes e indivíduos: o que é um indivíduo neste problema
+- Genes e indivíduos: o que é um indivíduo neste problema? R: pontos de entrega
 - Função de fitness: como saber a qualidade de um conjunto de rotas
 - Função de mutação: como mudar a ordem das cidades e entre as vans
 - Função de crossover: como trocar genes entre os indivíduos
@@ -56,11 +85,15 @@ e será necessário testar taxas de mutação, crossover e quantidade de indiví
 - Função de Mutação: testar mais de um tipo de mutação. qual é a taxa ideal de mutação? outros valores melhoram ou pioram?
 - Função de Cross-Over: qual é a taxa ideal de cross-over? outros valores melhoram ou pioram?
 
+===========
+
 SAÍDA
 Van 1:
 2 → 5 → 3
 
 Van 2: 
 4 → 6 → 1
+
+===========
 
 '''
