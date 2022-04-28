@@ -74,6 +74,18 @@ individuo_q = individuos[16]
 
 
 
+def genesis(rota, tamanho_populacao):
+  population_set = []
+  for i in range(tamanho_populacao):
+    sol_i = random.sample(rota, 16)
+    population_set.append(sol_i)
+  return np.array(population_set)
+
+population_set = genesis(individuos[0], tamanho_populacao)
+print(population_set)
+
+
+
 # gerar o individuo: veículo com uma sequência de entrega
 # função fitness: tentar encontrar a melhor sequência
 # função de mutação: sugestão fazer o flip (random.choices)
@@ -82,27 +94,22 @@ individuo_q = individuos[16]
 # função seleção: seleciona/clasifica um sequência e enviar p/ as funções de mutação de cross-over
 # finaliza com o while/loop até achar o melhor caso (importante: critério de parada (qtd de gerações/limite:1000))
 
-# pegar o número de nós do problema
-# pegar o número do nó que representa o ponto de origem
-
 
 
 '''
 
-mesma quilometragem por dia e pudessem carregar aproximadamente a mesma quantidade carga entre elas para quem nenhuma equipe ficasse sobrecarregada
-
 dada uma quantidade de N de vans e as distâncias entre os pontos de entrega, deve gerar:
 
-- Genes e indivíduos: o que é um indivíduo neste problema? R: pontos de entrega
-- Função de fitness: como saber a qualidade de um conjunto de rotas
-- Função de mutação: como mudar a ordem das cidades e entre as vans
-- Função de crossover: como trocar genes entre os indivíduos
+- genes e indivíduos: o que é um indivíduo neste problema? R: pontos de entrega
+- função de fitness: como saber a qualidade de um conjunto de rotas
+- função de mutação: como mudar a ordem das cidades e entre as vans
+- função de crossover: como trocar genes entre os indivíduos
 
 e será necessário testar taxas de mutação, crossover e quantidade de indivíduos que sobrará em cada geração.
 
-- Função de Seleção: aplicar a Seleção por tragédia depois de 1000 gerações
-- Função de Mutação: testar mais de um tipo de mutação. qual é a taxa ideal de mutação? outros valores melhoram ou pioram?
-- Função de Cross-Over: qual é a taxa ideal de cross-over? outros valores melhoram ou pioram?
+- função de seleção: aplicar a Seleção por tragédia depois de 1000 gerações
+- função de mutação: testar mais de um tipo de mutação. qual é a taxa ideal de mutação? outros valores melhoram ou pioram?
+- função de cross-over: qual é a taxa ideal de cross-over? outros valores melhoram ou pioram?
 
 ===========
 
