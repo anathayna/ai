@@ -54,26 +54,6 @@ vans = data['num_vehicles']
 
 
 
-individuo_a = individuos[0]
-individuo_b = individuos[1]
-individuo_c = individuos[2]
-individuo_d = individuos[3]
-individuo_e = individuos[4]
-individuo_f = individuos[5]
-individuo_g = individuos[6]
-individuo_h = individuos[7]
-individuo_i = individuos[8]
-individuo_j = individuos[9]
-individuo_k = individuos[10]
-individuo_l = individuos[11]
-individuo_m = individuos[12]
-individuo_n = individuos[13]
-individuo_o = individuos[14]
-individuo_p = individuos[15]
-individuo_q = individuos[16]
-
-
-
 def genesis(rota, tamanho_populacao):
   population_set = []
   for i in range(tamanho_populacao):
@@ -82,10 +62,31 @@ def genesis(rota, tamanho_populacao):
   return np.array(population_set)
 
 population_set = genesis(individuos[0], tamanho_populacao)
-print(population_set)
 
 
 
+def fitness(individuo):
+  total = 0
+  for i in range(len(individuos)):
+    if individuos[i] == individuo[i]: total += 0.25 # 4 vans
+  return total
+
+
+
+def mutate(populacao):
+  populacao_escolhida = random.choices(populacao, k=math.ceil(tx_mutacao*len(populacao)))
+  return [mutate_flip(individuo) for individuo in populacao_escolhida]
+
+
+
+def mutate_flip(individuo):
+  novo_individuo = list(individuo)
+  index = random.randint(0, len(individuo) - 1)
+  novo_individuo[index] = random.choice(individuos)
+  return novo_individuo
+
+
+    
 # gerar o individuo: veículo com uma sequência de entrega
 # função fitness: tentar encontrar a melhor sequência
 # função de mutação: sugestão fazer o flip (random.choices)
