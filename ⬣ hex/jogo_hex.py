@@ -88,11 +88,6 @@ class JogoHex():
     caractere = ord(jogada[0].lower()) - ord('a')
     return (caractere, int(jogada[1:]))
 
-  
-
-  def jogada_valida(self):
-    return self.tabuleiro[self.x] == self.HUMANO
-
 
 
   def colocar_peca(self, coordenadas, jogador):
